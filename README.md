@@ -28,12 +28,11 @@ lib/
 ## Getting started
 
 1. Get a free API key from [newsapi.org](https://newsapi.org).
-2. Put your key in `lib/repository/news_repository.dart`.
-3. Run:
+2. Run with your key (read at build time, nothing is stored in the repo):
 
 ```bash
 flutter pub get
-flutter run
+flutter run --dart-define=NEWS_API_KEY=your_key
 ```
 
 ## License
