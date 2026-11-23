@@ -11,9 +11,9 @@ import 'package:news_appp/models/categories_new_model.dart';
 // class NewsRepository {
 //   Future<NewsChannelHeadlinesModel> fetchNewsChannelsHeadlinesApi() async {
 //     String url =
-//         "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=391b8f6d3907483b9a303d1423d59313";
+//         "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=$_newsApiKey";
 //     // String url =
-//     //     "https://newsapi.org/v2/top-headlines?country=us&apiKey=391b8f6d3907483b9a303d1423d59313";
+//     //     "https://newsapi.org/v2/top-headlines?country=us&apiKey=$_newsApiKey";
 //     final response = await http.get(Uri.parse(url));
 //     // if (kDebugMode) {
 //     //   print(response.body);
@@ -28,11 +28,15 @@ import 'package:news_appp/models/categories_new_model.dart';
 
 import '../models/news_channel_headlines_model.dart';
 
+// NewsAPI key is passed at build time, never committed:
+// flutter run --dart-define=NEWS_API_KEY=your_key
+const String _newsApiKey = String.fromEnvironment('NEWS_API_KEY');
+
 class NewsRepository {
   Future<NewsChannelHeadlinesModel> fetchNewsChannelsHeadlinesApi(
       String source) async {
     String url =
-        "https://newsapi.org/v2/top-headlines?sources=$source&apiKey=391b8f6d3907483b9a303d1423d59313";
+        "https://newsapi.org/v2/top-headlines?sources=$source&apiKey=$_newsApiKey";
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -44,7 +48,7 @@ class NewsRepository {
 
   Future<CategoriesNewModel> fetchCategoriesNewsApi(String category) async {
     String url =
-        "https://newsapi.org/v2/everything?q=$category&apiKey=391b8f6d3907483b9a303d1423d59313";
+        "https://newsapi.org/v2/everything?q=$category&apiKey=$_newsApiKey";
     final response = await http.get(Uri.parse(url));
     if (kDebugMode) {
       print(response.body);
